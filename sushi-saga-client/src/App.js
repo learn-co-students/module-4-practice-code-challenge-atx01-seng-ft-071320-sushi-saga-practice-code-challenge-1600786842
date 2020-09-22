@@ -28,8 +28,20 @@ class App extends Component {
       });
   }
 
+  addToBudget = (money) => {
+    this.setState({
+      budget: this.state.budget + money
+    })
+  }
+
   moreSushi = () => {
-    const nextSushis = this.state.sushiID.map(id => id + 4)
+    let nextSushis = []
+    if (this.state.sushiID[3] < this.state.sushi.length) { 
+      nextSushis = this.state.sushiID.map(id => id + 4) 
+    }
+    else {
+      nextSushis = [1, 2, 3, 4]
+    }
     this.setState({
       sushiID: nextSushis
     })
@@ -50,7 +62,7 @@ class App extends Component {
     return (
       <div className="app">
         <SushiContainer sushi={this.state.sushi} sushiID={this.state.sushiID} moreSushi={this.moreSushi} eatSushi={this.eatSushi} />
-        <Table sushiEaten={this.state.sushiEaten} budget={this.state.budget} />
+        <Table sushiEaten={this.state.sushiEaten} budget={this.state.budget} addToBudget={this.addToBudget} />
       </div>
     );
   }

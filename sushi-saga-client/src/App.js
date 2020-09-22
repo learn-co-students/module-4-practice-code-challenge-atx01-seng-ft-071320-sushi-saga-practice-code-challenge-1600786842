@@ -7,11 +7,50 @@ const API = "http://localhost:3000/sushis"
 
 class App extends Component {
 
+  constructor() {
+    super()
+    this.state = {
+      budget: 100,
+      sushi: [],
+      sushiID: [],
+      sushiEaten: []
+    }
+  }
+
+  componentDidMount() {
+    fetch(API)
+      .then(response => response.json())
+      .then(data => {
+        this.setState({
+          sushi: data,
+          sushiID: [1, 2, 3, 4]
+        })
+      });
+  }
+
+  moreSushi = () => {
+    const nextSushis = this.state.sushiID.map(id => id + 4)
+    this.setState({
+      sushiID: nextSushis
+    })
+  }
+
+  eatSushi = (sushi) => {
+    if (sushi.img_url !== "" && this.state.budget >= sushi.price) {
+      console.log("nom")
+      sushi.img_url = ""
+      this.setState({
+        sushiEaten: [sushi, ...this.state.sushiEaten],
+        budget: this.state.budget - sushi.price
+      })
+    }
+  }
+
   render() {
     return (
       <div className="app">
-        <SushiContainer />
-        <Table />
+        <SushiContainer sushi={this.state.sushi} sushiID={this.state.sushiID} moreSushi={this.moreSushi} eatSushi={this.eatSushi} />
+        <Table sushiEaten={this.state.sushiEaten} budget={this.state.budget} />
       </div>
     );
   }

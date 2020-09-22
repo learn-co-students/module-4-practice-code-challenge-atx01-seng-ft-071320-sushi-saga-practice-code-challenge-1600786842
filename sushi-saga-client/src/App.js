@@ -10,7 +10,7 @@ class App extends Component {
    state = {
     allSushis: [],
     startIndex: 0,
-    bank: 106
+    bank: 100
   }
 
   componentDidMount() {

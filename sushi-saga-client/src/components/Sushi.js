@@ -1,7 +1,8 @@
 import React, { Fragment } from 'react'
 
-const Sushi = (props) => {
-  return (
+const Sushi = (props) => { 
+  console.log(props.sushis)
+  return ( 
     <div className="sushi">
       <div className="plate" 
            onClick={/* Give me a callback! */ null}>
@@ -10,11 +11,11 @@ const Sushi = (props) => {
           false ?
             null
           :
-            <img src={/* Give me an image source! */ } width="100%" />
+            <img src={props.sushis.img_url} width="100%" />
         }
       </div>
       <h4 className="sushi-details">
-        {/* Give me a name! */} - ${/* Give me a price! */}
+        {props.sushis.name} - ${props.sushis.price}
       </h4>
     </div>
   )

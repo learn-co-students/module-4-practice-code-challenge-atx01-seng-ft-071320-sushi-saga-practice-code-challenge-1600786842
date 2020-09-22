@@ -13,7 +13,8 @@ class App extends Component {
       loaded: false,
       firstI: 0,
       secondI: 4,
-      budget: 100
+      budget: 100,
+      platesArray: []
     }
   }
 
@@ -42,7 +43,8 @@ class App extends Component {
   handleClick = (price) => {
     this.setState( previousState => {
       return {
-        budget: previousState.budget - price
+        budget: previousState.budget - price,
+        platesArray: previousState.platesArray.concat(price)
       } 
     });
   }
@@ -58,7 +60,7 @@ class App extends Component {
     return (
       <div className="app">
         <SushiContainer sushis={fourSushi} handleMoreBtn={this.changeIndexState} handleClick={this.handleClick} budget={this.state.budget}/>
-        <Table budget={this.state.budget} />
+        <Table budget={this.state.budget} platesArray= {this.state.platesArray}/>
       </div>
     );
   }
